@@ -1,0 +1,50 @@
+<title>Compare Module Feedback Scores</title>
+<script src=//code.jquery.com/jquery-3.2.1.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js></script>
+<h3>Enter Module Number(s)</h3>
+<input id=MOD_CODE value=SET08108><input id=MOD_CODE2 value=CSN08101><button id='go'>Go</button>
+<canvas id="myChart" width="400" height="400"></canvas>
+<script>
+$(function(){
+  $('#go').click(function(){
+      var data = {labels:[],
+        datasets:[{label: $('#MOD_CODE').val()+' results',
+          backgroundColor: "rgba(179,181,198,0.2)",
+          borderColor: "rgba(179,181,198,1)",
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(179,181,198,1)",
+          data:[],}
+        ,{label: $('#MOD_CODE2').val()+' results',
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          pointBackgroundColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(255,99,132,1)",
+          data:[],}
+        ]};
+    $.ajax({url:'output.php',data:{MOD_CODE:$('#MOD_CODE').val()},dataType:'json',success:function(d){
+      for(var i=0;i<d.length;i++){
+        data.labels.push(d[i][0]);
+        data.datasets[0].data.push(parseFloat(d[i][1]));
+      }
+    }});
+    $.ajax({url:'output.php',data:{MOD_CODE:$('#MOD_CODE2').val()},dataType:'json',success:function(e){
+      for(var i=0;i<e.length;i++){
+        data.datasets[1].data.push(parseFloat(e[i][1]));
+      }
+      console.log(data);
+       var ctx = document.getElementById("myChart");
+       var myChart = new Chart(ctx, {
+           type: 'radar',
+           data:data,
+           options:{
+             responsive:false,
+             scale:{ticks:{beginAtZero:true}}}});
+    }}); 
+  })
+});
+</script>
+

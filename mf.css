@@ -1,0 +1,56 @@
+body{
+  background-color:white;
+}
+img#logo{
+  position:absolute;
+  top:0px;
+  right:0px;
+  width:400px;
+  height:125px;
+}
+div.welcome{
+  font-family:Tahoma, Geneva, sans-serif;
+}
+div.module{
+  background-color:white;
+  border:solid black;
+  padding:1ex;
+  margin-left:25%;
+  margin-right:25%;
+  margin-top:10ex;
+}
+li{
+  font-size:20px;
+  font-style:italic;
+  list-style-type:none;
+  font-family:Tahoma, Geneva, sans-serif;
+}
+div.question{
+  text-align:center;
+  padding-bottom:10px;
+  padding-top:10px;
+  margin:3ex;
+  display:block;
+}
+.button{
+  padding-top:3px;
+  display:inline-block;
+}
+div.submit{
+  text-align:center;
+}
+input[type="radio"]{
+  display:none;
+}
+label{
+  padding-top:4px;
+  border-radius:10px;
+  height:20px;
+  width:20px;
+  text-align:center;
+  display: inline-block;
+  border:solid thin black;
+}
+input[type="radio"]:checked + label {
+    background-color:#D41E46;  
+}
